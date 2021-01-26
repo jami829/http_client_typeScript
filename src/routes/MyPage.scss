@@ -1,0 +1,32 @@
+.mypage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+
+  .myinfo-title {
+    align-items: left;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .email-info,
+  .pw-info,
+  .name-info,
+  .mobile-info {
+    .description {
+      float: left;
+      width: 30%;
+      font-weight: bolder;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .print {
+      float: left;
+      width: 70%;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

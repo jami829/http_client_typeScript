@@ -1,0 +1,28 @@
+.appTemplate {
+  width: 768px;
+  // margin-left: auto;
+  // margin-right: auto;
+  // margin-top: 2rem;
+  overflow: hidden;
+
+  .appTitle {
+    background: none;
+    color: #000000;
+    height: 4rem;
+    font-size: 1.5rem;
+    display: flex;
+    // padding-left: 2rem;
+    align-items: center; // 위아래
+    justify-content: left; // 좌우
+  }
+
+  .appContent {
+    background: white;
+    @media (max-width: 1024px) {
+      width: 768px;
+    }
+    @media (max-width: 768px) {
+      width: 70%;
+    }
+  }
+}

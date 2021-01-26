@@ -1,0 +1,96 @@
+// react-virtualized 의존성을 활용한 최적화
+// 렌더링 안된 리스트들에 대한 outline: none 스타일을 적용
+.TodoListItem-virtualized {
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
+
+  &:nth-child(even) {
+    background: #f8f9fa;
+  }
+}
+
+.TodoListItem {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+
+  .important-check {
+    cursor: pointer;
+    // flex: 0.1;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 1.5rem;
+    }
+    // 중요 표시 되었을 때
+    &.important {
+      svg {
+        color: #ff0095;
+      }
+    }
+    @media (max-width: 835px) {
+      flex: none;
+      width: 1rem;
+    }
+  }
+
+  .todo-date {
+    width: 6rem;
+    color: #999999;
+    // 중요 표시 되었을 때
+    @if important {
+      svg {
+        color: #ff0095;
+      }
+    }
+  }
+
+  .todo-content {
+    margin-left: 0.5rem;
+    // flex: 1; // 차지할 수 있는 영역을 모두 차지
+    width: 30rem;
+  }
+
+  .complete-check {
+    cursor: pointer;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 1.5rem;
+    }
+    // 완료 체크 되었을 때
+    &.complete {
+      svg {
+        color: #1d808f;
+      }
+      .todo-content {
+        color: #adb5bd;
+        text-decoration: line-through;
+      }
+    }
+    @media (max-width: 835px) {
+      flex: none;
+      width: 1rem;
+    }
+  }
+
+  .todo-remove {
+    display: flex;
+    width: 1.5rem;
+    margin-left: 2rem;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #c7c7c7;
+    cursor: pointer;
+    &:hover {
+      color: #ff6060;
+    }
+    @media (max-width: 835px) {
+      flex: none;
+      width: 1rem;
+    }
+  }
+}

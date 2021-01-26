@@ -1,0 +1,28 @@
+.editpage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+
+  .myinfo-title {
+    align-items: left;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .description {
+    float: left;
+    width: 30%;
+    font-weight: bolder;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .editbox {
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    width: 30%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
