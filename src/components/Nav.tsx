@@ -3,9 +3,24 @@ import { Link } from "react-router-dom";
 
 // Css
 import "./Nav.scss";
+import SignOut from "./SignOut";
+import Welcome from "./Welcome";
 
-function Nav() {
+interface Props {
+  resetLogin: () => void;
+  loginUserInfo: {
+    isLogin?: boolean;
+    userId?: string;
+    email?: string;
+    password?: string;
+    name?: string;
+    mobile?: string;
+    errorMessage?: string;
+  }
+}
 
+const Nav: React.FC<Props> = (props) => {
+  console.log("props", props)
   const NavLinkStyle = {
     textDecoration: `none`,
     color: `white`
@@ -13,7 +28,13 @@ function Nav() {
   return (
 
     <ul className="nav">
-      <div className="nav-welcome">안녕~~~</div>
+      <div className="nav-welcome">
+        <Welcome name={props.loginUserInfo.name} />
+        <SignOut
+          logOut={props.resetLogin}
+          loginStatus={props.loginUserInfo.isLogin}
+        />
+      </div>
 
       <li className="nav-todo">
         <Link to={"/"} style={NavLinkStyle}>
