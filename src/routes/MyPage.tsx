@@ -108,7 +108,7 @@ const MyPage: React.FC<Props> = (props) => {
       <section>
         <Edit
           // to={"/edit"}
-          style={{ textDecoration: "none", color: "black" }}
+          // style={{ textDecoration: "none", color: "black" }}
           makeChange={makeChange}
         />
       </section>
