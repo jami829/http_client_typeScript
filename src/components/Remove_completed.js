@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom"
+import Button from "./Button";
 
 
 class RemoveUserCompleted extends React.Component {
@@ -8,7 +9,7 @@ class RemoveUserCompleted extends React.Component {
     isModalOpen: true
   }
 
-  closeModla = () => {
+  closeModal = () => {
     this.setState({
       isModalOpen: false
     });
@@ -20,7 +21,7 @@ class RemoveUserCompleted extends React.Component {
       <>
         { this.state.isModalOpen === true ?
           <div className="modal">
-            <div className="modal_overlay" onClick={this.closeModla}></div>
+            <div className="modal_overlay" onClick={this.closeModal}></div>
             <div className="modal_content">
               <h1>가 그냥...</h1>
 
@@ -35,11 +36,11 @@ class RemoveUserCompleted extends React.Component {
                 </div>
                 <div>
                   <NavLink to="/" className='signUp_link'>
-                    <button
+                    <Button
                       className="signUp_btn"
                     >
                       로그인 페이지
-                </button>
+                </Button>
                   </NavLink>
                 </div>
 

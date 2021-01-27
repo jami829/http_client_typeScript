@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { NavLink, RouteComponentProps } from "react-router-dom";
+import { NavLink, RouteComponentProps, useHistory } from "react-router-dom";
 import Button from "./Button";
-// import { ReactRouterPropTypes } from "react-router-prop-types"
+import ReactRouterPropTypes from "../../node_modules/react-router-prop-types"
+
 
 
 //fakedate
@@ -21,19 +22,28 @@ import Button from "./Button";
 //     password: string;
 //   }
 // }
-// type RemoveProps = RouteComponentProps;
-function Remove(props: any) {
-  // console.log("remove", props)
+// type RemoveProps = RouteComponentProps<any>;
+
+interface removeProps {
+  // extends RouteComponentProps {
+  pass?: string;
+  signOut: () => void;
+}
+
+// function Remove(props: removeProps) {
+const Remove: React.FC<removeProps> = (props) => {
+  console.log("remove", props)
   const [modal, setModal] = useState<boolean>(true);
   const [input, setInput] = useState<{ password?: string, errorMessage?: string }>({ password: "", errorMessage: "" })
 
-
+  const History = useHistory()
 
   const closeModal = () => {
     setModal(
       false
     )
-    props.history.push("/mypage");
+    // window.history.go(-1)
+    History.push("/mypage")
   }
 
   const handleInputValue = (key: string) => (text: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +63,10 @@ function Remove(props: any) {
       .then((response) => {
         console.log("handleClickRemoveUserInfo", response)
       })
+    props.signOut()
+    History.push({
+      pathname: "/remove_user_completed",
+    })
   }
 
   return (
@@ -100,7 +114,7 @@ function Remove(props: any) {
 }
 
 // Remove.propTypes = {
-//   history: ReactRouterPropTypes.history.isRequired,
-// };
+//   history: ReactRouterPropTypes.history.isRequired
+// }
 
 export default Remove;

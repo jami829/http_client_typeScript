@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // css
 import './App.css';
 import Nav from './components/Nav';
 import Remove from './components/Remove';
+import Remove_completed from './components/Remove_completed';
 import MyPage from './routes/MyPage';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
   })
   const [todos, setTodos] = useState<[]>([])
 
-  const handleSignOut = (): void => {
+  const handleSignOut = () => {
     setLogin({
       isLogin: false,
       email: "",
@@ -65,13 +66,13 @@ function App() {
     mobile
   } = login
   return (
-    <BrowserRouter>
+    <Router>
       <div className="menu">
         <Nav resetLogin={handleSignOut} loginUserInfo={login} />
       </div>
       <div className="screen">
         <Route
-          path={"/mypage"}
+          path="/mypage"
           render={() =>
             // isLogin ? (
             <MyPage
@@ -88,9 +89,14 @@ function App() {
             // )
           }
         />
-        <Route path={"/remove"} component={Remove} />
+        <Route path={"/remove"} render={() => <Remove signOut={handleSignOut} pass={login.password} />} />
+        {/* <Route path={"/remove"} signOut={handleSignOut} pass={login.password} >
+          <Remove />
+        </Route> */}
+        {/* <Route path={"/remove"} component={Remove} /> */}
+        <Route path={"/remove_user_completed"} component={Remove_completed} signOut={handleSignOut} />
       </div>
-    </BrowserRouter>
+    </Router>
   )
 }
 

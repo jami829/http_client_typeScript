@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
+
 // components
 import Remove from "../components/Remove";
 import Edit from "../components/Edit";
@@ -20,6 +21,7 @@ interface Props {
 const MyPage: React.FC<Props> = (props) => {
 
   console.log("myProps", props)
+
 
   const [mypageInfo, setMypageInfo] = useState<{
     email?: string;
@@ -78,11 +80,12 @@ const MyPage: React.FC<Props> = (props) => {
               <Link
                 to={{
                   pathname: "/remove",
-                  state: {
-                    password: props.password,
-                  },
+                  // state: {
+                  //   password: props.password,
+                  // },
                   // signOut: props.signOut, // 메소드화가 되어 전달되어질 것. ex) signOut();
                 }}
+
                 style={{ color: `white`, textDecoration: `none` }}
 
               // to={"/remove"}
@@ -115,5 +118,7 @@ const MyPage: React.FC<Props> = (props) => {
     </>
   )
 }
+
+
 
 export default MyPage;
