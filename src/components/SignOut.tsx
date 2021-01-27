@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 // components
 import Button from "./Button";
@@ -11,9 +12,11 @@ interface Props {
 
 const SignOut: React.FC<Props> = (props) => {
 
+  const History = useHistory()
   const reLogin = () => {
     if (props.loginStatus === false) {
-      window.location.href = "/";
+      // window.location.href = "/";
+      History.push("/")
     }
   }
 
