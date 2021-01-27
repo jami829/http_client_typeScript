@@ -98,6 +98,20 @@ const MyPage: React.FC<Props> = (props) => {
           </div>
         </div>
       </section>
+      <br />
+      <br />
+      <br />
+      <hr />
+      <br />
+      <br />
+      <br />
+      <section>
+        <Edit
+          // to={"/edit"}
+          style={{ textDecoration: "none", color: "black" }}
+          makeChange={makeChange}
+        />
+      </section>
     </>
   )
 }

@@ -1,8 +1,9 @@
+import { string } from "prop-types";
 import React, { useCallback, useReducer } from "react";
 import { Link } from "react-router-dom";
 
 // components
-import Button from "../components/Button";
+import Button from "./Button";
 
 import "./Edit.scss";
 
@@ -18,15 +19,25 @@ import "./Edit.scss";
  - ToDo.js 컴포넌트의 주석 참조 부탁드립니다.
 ******************************************************************/
 
+interface State {
+  password: string;
+  name: string;
+}
+
 // reducer hook 액션 정의
-function reducer(state, action) {
+function reducer(state: State, action: any) {
   return {
     ...state,
     [action.name]: action.value,
   };
 }
 
-const Edit = ({ makeChange }) => {
+interface editProps {
+  makeChange: (data: any) => void;
+}
+
+
+const Edit: React.FC<editProps> = (props) => {
   // reducer hook으로 한꺼번에 state 관리할 대상 정의
   const [state, dispatch] = useReducer(reducer, {
     password: "",
@@ -36,7 +47,7 @@ const Edit = ({ makeChange }) => {
   const { password, name } = state;
 
   // reducer hook 구동 대상("액션값")은 "이벤트 객체(e.target 값)"라고 설정
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(e.target);
   };
 
@@ -47,8 +58,8 @@ const Edit = ({ makeChange }) => {
     최종제출 이름: ${state.name}
     `);
 
-    makeChange(state);
-  }, [makeChange, state]);
+    props.makeChange(state);
+  }, [props.makeChange, state]);
 
   return (
     <>
