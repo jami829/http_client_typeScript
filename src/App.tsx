@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 // css
 import './App.css';
 import Nav from './components/Nav';
+import Remove from './components/Remove';
 import MyPage from './routes/MyPage';
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
             // )
           }
         />
+        <Route path={"/remove"} component={Remove} />
       </div>
     </BrowserRouter>
   )
