@@ -204,17 +204,21 @@ const SignInModal: React.FC<SignInModalProps> = (props) => {
                         <div className="container1">
                             <div className="email_div">
                                 <span className="email_span">e-mail</span>
-                                <input
-                                    type="email"
-                                    onChange={hadleInputValue("email")}
-                                ></input>
+                                <span>
+                                    <input
+                                        type="email"
+                                        onChange={hadleInputValue("email")}
+                                    ></input>
+                                </span>
                             </div>
                             <div className="PW_div">
                                 <span>PW</span>
-                                <input
-                                    type="password"
-                                    onChange={hadleInputValue("password")}
-                                ></input>
+                                <span>
+                                    <input
+                                        type="password"
+                                        onChange={hadleInputValue("password")}
+                                    ></input>
+                                </span>
                             </div>
                         </div>
                         <div className="findAccount_span">

@@ -209,43 +209,53 @@ function SignUpModal(props: any) {
             }}
           >
             <div className="container1">
-              <div className="inputInfo">
-                <span className="email_span">e-mail</span>
-                <input
-                  type="email"
-                  onChange={handleInPutValue("email")}
-                ></input>
-                <button
-                  className="check"
-                  onClick={handleClickduplicatedId}
-                >
-                  중복 확인
+              <div id="signup_email_div">
+                <span className="signup_span_title">e-mail</span>
+                <span>
+                  <input
+                    type="email"
+                    onChange={handleInPutValue("email")}
+                  ></input>
+                </span>
+                <span className="check">
+                  <button
+                    onClick={handleClickduplicatedId}
+                  >
+                    중복 확인
                   </button>
+                </span>
                 {/* <div>{info.duplicatedIdMsg}</div> */}
               </div>
 
               <div>
-                <span>PW</span>
-                <input
-                  type="password"
-                  onChange={handleInPutValue("password")}
-                ></input>
+                <span className="signup_span_title">PW</span>
+                <span>
+                  <input
+                    className="Signup_Pw_inputInfo"
+                    type="password"
+                    onChange={handleInPutValue("password")}
+                  ></input>
+                </span>
               </div>
 
               <div>
-                <span>고객명</span>
-                <input
-                  type="text"
-                  onChange={handleInPutValue("name")}
-                ></input>
+                <span className="signup_span_title">고객명</span>
+                <span>
+                  <input
+                    type="text"
+                    onChange={handleInPutValue("name")}
+                  ></input>
+                </span>
               </div>
 
               <div>
-                <span>연락처</span>
-                <input
-                  type="text"
-                  onChange={handleInPutValue("mobile")}
-                ></input>
+                <span className="signup_span_title">연락처</span>
+                <span>
+                  <input
+                    type="text"
+                    onChange={handleInPutValue("mobile")}
+                  ></input>
+                </span>
                 <div>{info.errorMessageMobile}</div>
               </div>
             </div>
