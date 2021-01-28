@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 // css
@@ -30,14 +30,16 @@ function App() {
     errorMessage: string;
   }>({
     isLogin: false,
-    userId: window.sessionStorage.getItem("id"),
-    email: window.sessionStorage.getItem("email"),
+    userId: "",
+    email: "",
     password: "",
-    name: window.sessionStorage.getItem("name"),
+    name: "",
     mobile: "",
     errorMessage: ""
   })
   const [todos, setTodos] = useState<any>([])
+
+  const History = useHistory();
 
   const {
     isLogin,
@@ -47,6 +49,8 @@ function App() {
     password,
     mobile
   } = login
+
+  console.log(name)
 
   // 세션 저장소에 저장된 id를 불러와 req하자.
   const handleResponseSuccess = (): void => {
@@ -78,9 +82,9 @@ function App() {
     setLogin({
       ...login,
       isLogin: true,
-      email: window.sessionStorage.getItem("email")!,
-      userId: window.sessionStorage.getItem("id")!,
-      name: window.sessionStorage.getItem("name")!,
+      email: window.sessionStorage.getItem("email"),
+      userId: window.sessionStorage.getItem("id"),
+      name: window.sessionStorage.getItem("name"),
     });
   };
 
@@ -116,7 +120,7 @@ function App() {
     setTodos({ todos: data });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {  // useEffect로 하면 새로고침 시 아주 잠시동안 로그아웃상태가 됨, 둘의 성격차이를 보면 알 수 있음.
     // login
 
     const userEmail = window.sessionStorage.getItem("email");
@@ -125,12 +129,25 @@ function App() {
       handleResponseSuccess();
     } else {
       // handleSignOut();
-      return () => window.sessionStorage.clear();
+      // window.sessionStorage.clear();
     }
     // adoptRecentTodo;
     // console.log("메인2 변경감지", this.state);
 
-  }, [])
+  }, [email])
+
+  // useLayoutEffect(() => {
+  //   const userEmail = window.sessionStorage.getItem("email");
+  //   if (userEmail) {
+  //     // History.push("/");
+  //     try {
+  //       handleResponseSuccess();
+  //     }
+  //     catch {
+  //       // window.sessionStorage.clear();
+  //     }
+  //   }
+  // }, [email])
 
   console.log("login", login)
 

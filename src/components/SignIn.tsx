@@ -83,13 +83,16 @@ const SignInModal: React.FC<SignInModalProps> = (props) => {
                 .post("https://api.get-todo.com/signin", userInfo)
                 .then((response) => {
                     // console.log("뭘받아와?", response);
-                    setUserInfo({
-                        ...userInfo,
-                        id: response.data.id, // 서버에서 생성 및 전달받은 고유 유저id
-                        name: "zxc",
-                        // name: response.data.name,
-                        email: response.data.email,
-                    })
+                    // setUserInfo({
+                    //     ...userInfo,
+                    //     id: response.data.id, // 서버에서 생성 및 전달받은 고유 유저id
+                    //     // name: "zxc",
+                    //     name: response.data.name,
+                    //     email: response.data.email,
+                    // })
+                    window.sessionStorage.setItem("id", response.data.id)
+                    window.sessionStorage.setItem("name", response.data.name)
+                    window.sessionStorage.setItem("email", response.data.email)
                     console.log("axiosthen", userInfo)
                     console.log("response", response.data.name)
 
@@ -165,10 +168,18 @@ const SignInModal: React.FC<SignInModalProps> = (props) => {
     useEffect(() => {
         console.log("effect", userInfo)
 
-        window.sessionStorage.setItem("id", id)
-        window.sessionStorage.setItem("email", email)
-        window.sessionStorage.setItem("name", name)
-    }, [id, email, name]) // 이거 설정안해주면 세션스토리지에 저장이 안됨.
+        // window.sessionStorage.setItem("id", id)
+        // window.sessionStorage.setItem("email", email)
+        // window.sessionStorage.setItem("name", name)
+
+    }, [id, email, name]);
+    // }, []);
+
+    // window.sessionStorage.setItem("id", id)
+    // window.sessionStorage.setItem("email", email)
+    // window.sessionStorage.setItem("name", name)
+    window.sessionStorage.setItem("sdf", "asdf")
+
 
     console.log("사인인,세션저장소", window.sessionStorage);
     return (
