@@ -9,13 +9,13 @@ import Welcome from "./Welcome";
 interface Props {
   resetLogin: () => void;
   loginUserInfo: {
-    isLogin?: boolean;
-    userId?: string;
-    email?: string;
-    password?: string;
-    name?: string;
-    mobile?: string;
-    errorMessage?: string;
+    isLogin: boolean;
+    userId: string | null;
+    email: string | null;
+    password: string;
+    name: string | null;
+    mobile: string;
+    errorMessage: string;
   }
 }
 

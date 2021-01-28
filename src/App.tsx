@@ -21,23 +21,32 @@ import Edit from './components/Edit';
 function App() {
 
   const [login, setLogin] = useState<{
-    isLogin?: boolean;
-    userId?: string;
-    email?: string;
-    password?: string;
-    name?: string;
-    mobile?: string;
-    errorMessage?: string;
+    isLogin: boolean;
+    userId: string | null;
+    email: string | null;
+    password: string;
+    name: string | null;
+    mobile: string;
+    errorMessage: string;
   }>({
     isLogin: false,
-    userId: "",
-    email: "",
+    userId: window.sessionStorage.getItem("id"),
+    email: window.sessionStorage.getItem("email"),
     password: "",
-    name: "",
+    name: window.sessionStorage.getItem("name"),
     mobile: "",
     errorMessage: ""
   })
   const [todos, setTodos] = useState<any>([])
+
+  const {
+    isLogin,
+    userId,
+    email,
+    name,
+    password,
+    mobile
+  } = login
 
   // 세션 저장소에 저장된 id를 불러와 req하자.
   const handleResponseSuccess = (): void => {
@@ -67,6 +76,7 @@ function App() {
         console.log("메인2 에러", error.response);
       });
     setLogin({
+      ...login,
       isLogin: true,
       email: window.sessionStorage.getItem("email")!,
       userId: window.sessionStorage.getItem("id")!,
@@ -74,8 +84,12 @@ function App() {
     });
   };
 
+
+
+
   const handleSignOut = () => {
     setLogin({
+      ...login,
       isLogin: false,
       email: "",
       password: "",
@@ -92,10 +106,10 @@ function App() {
 
   // Edit 컴포넌트의 결과를 끌어올린다.
   const adoptModifiedInfo = (data: any) => {
-    if (data.email !== "") setLogin({ email: data.email });
-    if (data.password !== "") setLogin({ password: data.password });
-    if (data.name !== "") setLogin({ name: data.name });
-    if (data.mobile !== "") setLogin({ mobile: data.mobile });
+    if (data.email !== "") setLogin({ ...login, email: data.email });
+    if (data.password !== "") setLogin({ ...login, password: data.password });
+    if (data.name !== "") setLogin({ ...login, name: data.name });
+    if (data.mobile !== "") setLogin({ ...login, mobile: data.mobile });
   };
   // ToDo 컴포넌트의 결과를 끌어올린다.
   const adoptRecentTodo = (data: any) => {
@@ -104,6 +118,7 @@ function App() {
 
   useEffect(() => {
     // login
+
     const userEmail = window.sessionStorage.getItem("email");
     if (userEmail) {
       // return () => handleResponseSuccess();
@@ -117,14 +132,9 @@ function App() {
 
   }, [])
 
-  const {
-    isLogin,
-    userId,
-    email,
-    name,
-    password,
-    mobile
-  } = login
+  console.log("login", login)
+
+
   return (
     <Router>
       <div className="menu">

@@ -9,11 +9,11 @@ import Button from "../components/Button";
 import "./MyPage.scss";
 
 interface Props {
-  id?: string;
-  name?: string;
-  email?: string;
-  password?: string;
-  mobile?: string;
+  id: string | null;
+  name: string | null;
+  email: string | null;
+  password: string;
+  mobile: string;
   adoptModifiedInfo: (data: any) => void;
   signOut: () => void;
 }
@@ -24,10 +24,10 @@ const MyPage: React.FC<Props> = (props) => {
 
 
   const [mypageInfo, setMypageInfo] = useState<{
-    email?: string;
-    password?: string;
-    name?: string;
-    mobile?: string;
+    email: string | null;
+    password: string;
+    name: string | null;
+    mobile: string;
   }>({
     email: props.email,
     password: props.password,
@@ -35,8 +35,8 @@ const MyPage: React.FC<Props> = (props) => {
     mobile: props.mobile
   })
   const makeChange = (data: any) => {
-    if (data.password !== "") setMypageInfo({ password: data.password });
-    if (data.name !== "") setMypageInfo({ name: data.name });
+    if (data.password !== "") setMypageInfo({ ...mypageInfo, password: data.password });
+    if (data.name !== "") setMypageInfo({ ...mypageInfo, name: data.name });
     props.adoptModifiedInfo(data);
   }
 
