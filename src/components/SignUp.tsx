@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 //fakedate
 // import user from "../test_data_user.json";
 
-class SignUpModal extends React.Component {
-  state = {
+
+function SignUpModal(props: any) {
+
+  const [info, setInfo] = useState<{
+    name: string;
+    password: string;
+    email: string;
+    mobile: string;
+    duplicatedIdMsg: string;
+    errorMessage: string,
+    errorMessageMobile: string,
+    errorMessageEmail: string,
+  }>({
     name: "",
     password: "",
     email: "",
@@ -15,7 +26,8 @@ class SignUpModal extends React.Component {
     errorMessage: "",
     errorMessageMobile: "",
     errorMessageEmail: "",
-  };
+  })
+
 
   /* //! 백앤드 분들께 구현 요청하기 due to sign up function flows 
     //* 연락처 형식 헬퍼 함수: '-' 삽입 필수
@@ -42,8 +54,8 @@ class SignUpModal extends React.Component {
 
   // 중복확인 --> 백앤드 팀원들에게 구현했는지 물어보기 우선, 기능플로우 부터 확인.
   //fakedata 이용
-  handleClickduplicatedId = () => {
-    const { email, duplicatedIdMsg } = this.state;
+  const handleClickduplicatedId = () => {
+    const { email, duplicatedIdMsg } = info
     const userInfo = {
       email: email,
       message: duplicatedIdMsg,
@@ -53,26 +65,30 @@ class SignUpModal extends React.Component {
       .post("https://api.get-todo.com/searchinfo/overlapEmail", userInfo)
       .then((response) => {
         console.log("중복이메일?", response);
-        // this.setState({
-        //   duplicatedIdMsg: response
-        // })
+        setInfo({
+          ...info,
+          duplicatedIdMsg: response.data
+        })
+        // alert(info.duplicatedIdMsg)
+        setInfo({
+          ...info,
+          duplicatedIdMsg: ""
+        })
       })
       .catch((error) => {
-        // this.setState({
-        //   duplicatedIdMsg: error.response.data
-        // })
+        setInfo({
+          ...info,
+          duplicatedIdMsg: error.response.data
+        })
+        // alert(info.duplicatedIdMsg)
       })
-      .catch((error) => {
-        // this.setState({
-        //   duplicatedIdMsg: error.response.data
-        // })
-      });
+
 
     /* fakeData 사용 코드
     for (let i = 0; i < user.length; i++) {
       if (!userInfo.email.length) {
         return alert("항목을 입력해주세요.");
-
+        
       }
       else if (userInfo.email === user[i].email) {
         return alert("이미 존재하는 e-mail입니다.");
@@ -83,12 +99,23 @@ class SignUpModal extends React.Component {
     }
     return alert("사용이 가능한 e-mail입니다.");*/
   };
+  useEffect(() => { // axios와 같은 fetch 비동기 해결(state 적용되는 속도 맞추기 위함)
+    if (info.duplicatedIdMsg.length > 0) {
+      try {
+        alert(info.duplicatedIdMsg)
+      }
+      catch {
+        console.log("주의 메시지가 없습니다.")
+      }
+    }
+  })
 
-  handleInPutValue = (key) => (text) => {
+  const handleInPutValue = (key: string) => (text: React.ChangeEvent<HTMLInputElement>) => {
     console.log("잘 입력되나?");
     // console.log('k', key)
     // console.log('t', text)
-    this.setState({
+    setInfo({
+      ...info,
       [key]: text.target.value,
     });
     console.log(text);
@@ -96,12 +123,13 @@ class SignUpModal extends React.Component {
 
   // 회원가입한 새로운 유저 정보를 데이터 베이스에 저장한다.
   // 서버에 회원가입을 요청 후 로그인 페이지로 이동한다.
-  handClickAddNewUserInfo = () => {
+  const handClickAddNewUserInfo = () => {
+    const { name, password, email, mobile } = info
     const NewUserInformation = {
-      name: this.state.name,
-      password: this.state.password,
-      email: this.state.email,
-      mobile: this.state.mobile,
+      name: name,
+      password: password,
+      email: email,
+      mobile: mobile,
     };
 
     // 신규 등록 회원 정보를 서버로 전달 서버 -> DB -> DB 저장 후 해당 정보를 response에 담아서 클라이언트로 재 전송될 것.
@@ -119,11 +147,12 @@ class SignUpModal extends React.Component {
       .post("https://api.get-todo.com/signup", NewUserInformation)
       .then((response) => {
         console.log("res", response);
-        this.props.history.push("/");
+        props.history.push("/");
       })
       .catch((error) => {
         console.log("err", error.response);
-        this.setState({
+        setInfo({
+          ...info,
           errorMessage: error.response.data,
         });
       });
@@ -162,80 +191,80 @@ class SignUpModal extends React.Component {
     } */
   };
 
-  render() {
-    // console.log('user', user)
-    // console.log(this.props)
-    return (
-      <div className="modal">
-        <div className="modal_overlay"></div>
-        <div className="modal_content">
-          <h1>회원 가입</h1>
 
-          <div className="container">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <div className="container1">
-                <div className="inputInfo">
-                  <span className="email_span">e-mail</span>
-                  <input
-                    type="email"
-                    onChange={this.handleInPutValue("email")}
-                  ></input>
-                  <button
-                    className="check"
-                    onClick={this.handleClickduplicatedId}
-                  >
-                    중복 확인
-                  </button>
-                  <div>{this.state.duplicatedIdMsg}</div>
-                </div>
+  // console.log('user', user)
+  // console.log(this.props)
+  return (
+    <div className="modal">
+      <div className="modal_overlay"></div>
+      <div className="modal_content">
+        <h1>회원 가입</h1>
 
-                <div>
-                  <span>PW</span>
-                  <input
-                    type="password"
-                    onChange={this.handleInPutValue("password")}
-                  ></input>
-                </div>
-
-                <div>
-                  <span>고객명</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInPutValue("name")}
-                  ></input>
-                </div>
-
-                <div>
-                  <span>연락처</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInPutValue("mobile")}
-                  ></input>
-                  <div>{this.state.errorMessageMobile}</div>
-                </div>
-              </div>
-              <div>
-                <div>{this.state.errorMessage}</div>
-
-                {/* <NavLink to='' className='signUp_link'> */}
+        <div className="container">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <div className="container1">
+              <div className="inputInfo">
+                <span className="email_span">e-mail</span>
+                <input
+                  type="email"
+                  onChange={handleInPutValue("email")}
+                ></input>
                 <button
-                  className="signUp_btn"
-                  onClick={this.handClickAddNewUserInfo}
+                  className="check"
+                  onClick={handleClickduplicatedId}
                 >
-                  회원 가입
-                </button>
-                {/* </NavLink> */}
+                  중복 확인
+                  </button>
+                {/* <div>{info.duplicatedIdMsg}</div> */}
               </div>
-            </form>
-          </div>
+
+              <div>
+                <span>PW</span>
+                <input
+                  type="password"
+                  onChange={handleInPutValue("password")}
+                ></input>
+              </div>
+
+              <div>
+                <span>고객명</span>
+                <input
+                  type="text"
+                  onChange={handleInPutValue("name")}
+                ></input>
+              </div>
+
+              <div>
+                <span>연락처</span>
+                <input
+                  type="text"
+                  onChange={handleInPutValue("mobile")}
+                ></input>
+                <div>{info.errorMessageMobile}</div>
+              </div>
+            </div>
+            <div>
+              <div>{info.errorMessage}</div>
+
+              {/* <NavLink to='' className='signUp_link'> */}
+              <button
+                className="signUp_btn"
+                onClick={handClickAddNewUserInfo}
+              >
+                회원 가입
+                </button>
+              {/* </NavLink> */}
+            </div>
+          </form>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 
 export default SignUpModal;
