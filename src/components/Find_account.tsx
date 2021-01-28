@@ -1,27 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { string } from "prop-types";
+import Button from "./Button";
 
 //Fake Data
 // import user from "../test_data_user.json";
 
-class FindAccount extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      name: "",
-      mobile: "",
-      errorMessageEmail: "",
-      errorMessagePw: "",
-    };
-  }
+function FindAccount({ history }: any) {
 
-  handleInputValue = (key) => (text) => {
+  const [info, setInfo] = useState<{
+    email: string;
+    name: string;
+    mobile: string;
+    errorMessageEmail: string;
+    errorMessagePw: string;
+  }>({
+    email: "",
+    name: "",
+    mobile: "",
+    errorMessageEmail: "",
+    errorMessagePw: "",
+  })
+
+  const handleInputValue = (key: string) => (text: React.ChangeEvent<HTMLInputElement>): void => {
     console.log("질입력되나?");
     // console.log('k', key)
     // console.log('t', text)
-    this.setState({
+    setInfo({
+      ...info,
       [key]: text.target.value,
     });
   };
@@ -69,28 +76,30 @@ class FindAccount extends React.Component {
   };*/
   //*----------------------------------
 
-  handleFindEmailValue = () => {
-    const { email, name, mobile } = this.state;
+  const handleFindEmailValue = (): void => {
+    const { email, name, mobile } = info;
     const userIdInfo = {
       name: name,
       mobile: mobile,
     };
 
     if (!userIdInfo.name.length || !userIdInfo.mobile.length) {
-      this.setState({
+      setInfo({
+        ...info,
         errorMessageEmail: "모든 항목을 입력하세요.",
       });
     } else {
       axios
         .post("https://api.get-todo.com/searchinfo/email", userIdInfo)
         .then((response) => {
-          this.props.history.push({
+          history.push({
             pathname: "/useremail",
             state: response.data, // CompletedFindEmail에 props로 입력 값 넘겨주기
           });
         })
         .catch((error) => {
-          this.setState({
+          setInfo({
+            ...info,
             errorMessageEmail: error.response.data,
           });
         });
@@ -124,8 +133,8 @@ class FindAccount extends React.Component {
             } */
   };
 
-  handleFindPwValue = () => {
-    const { email, name, mobile } = this.state;
+  const handleFindPwValue = (): void => {
+    const { email, name, mobile } = info;
     const userPwInfo = {
       email: email,
       name: name,
@@ -137,21 +146,23 @@ class FindAccount extends React.Component {
       !userPwInfo.name.length ||
       !userPwInfo.mobile.length
     ) {
-      this.setState({
+      setInfo({
+        ...info,
         errorMessagePw: "모든 항목을 입력하세요.",
       });
     } else {
       axios
         .post("https://api.get-todo.com/searchinfo/password", userPwInfo)
         .then((response) => {
-          this.props.history.push({
+          history.push({
             pathname: "/userpw",
             state: response.data,
           });
         })
         .catch((error) => {
           console.log(error.response);
-          this.setState({
+          setInfo({
+            ...info,
             errorMessagePw: error.response.data,
           });
         });
@@ -189,95 +200,95 @@ class FindAccount extends React.Component {
        } */
   };
 
-  render() {
-    return (
-      <div className="modal">
-        <div className="modal_overlay"></div>
-        <div className="modal_content">
-          {/* -----------------이메일 찾기------------------ */}
 
-          <h2>e-mail 찾기</h2>
+  return (
+    <div className="modal">
+      <div className="modal_overlay"></div>
+      <div className="modal_content">
+        {/* -----------------이메일 찾기------------------ */}
 
-          <div className="container">
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="find_e-mail_box">
-                <div>
-                  <span>고객명</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInputValue("name")}
-                  ></input>
-                </div>
+        <h2>e-mail 찾기</h2>
 
-                <div>
-                  <span>연락처</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInputValue("mobile")}
-                  ></input>
-                </div>
+        <div className="container">
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="find_e-mail_box">
+              <div>
+                <span>고객명</span>
+                <input
+                  type="text"
+                  onChange={handleInputValue("name")}
+                ></input>
               </div>
 
-              <div>{this.state.errorMessageEmail}</div>
-              {/* <NavLink to='/useremail'> */}
-              <button className="findBtn" onClick={this.handleFindEmailValue}>
-                e-mail 찾기
-              </button>
-              {/* </NavLink> */}
-            </form>
-
-            <div className="line"> </div>
-
-            {/* -----------------패스워드 찾기------------------ */}
-
-            <h2>PW 찾기</h2>
-            {/* 바로 아랫 줄 코드. 이메일 형식이 안맞으면 말풍선으로 에러 메세지 띄움 */}
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="find_pw_box">
-                <div className="inputInfo">
-                  <span className="email_span">e-mail</span>
-                  <input
-                    type="email"
-                    onChange={this.handleInputValue("email")}
-                  ></input>
-                </div>
-                <div>
-                  <span>고객명</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInputValue("name")}
-                  ></input>
-                </div>
-
-                <div>
-                  <span>연락처</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInputValue("mobile")}
-                  ></input>
-                </div>
+              <div>
+                <span>연락처</span>
+                <input
+                  type="text"
+                  onChange={handleInputValue("mobile")}
+                ></input>
               </div>
-              <div>{this.state.errorMessagePw}</div>
+            </div>
 
-              {/* <NavLink to='/userpw'> */}
-              <button className="findBtn" onClick={this.handleFindPwValue}>
-                PW 찾기
-              </button>
-              {/* </NavLink> */}
-            </form>
+            <div>{info.errorMessageEmail}</div>
+            {/* <NavLink to='/useremail'> */}
+            <Button className="findBtn" onClick={handleFindEmailValue}>
+              e-mail 찾기
+              </Button>
+            {/* </NavLink> */}
+          </form>
 
-            <NavLink to="" className="signUp_link">
-              <button className="signUp_btn">로그인 페이지로 돌아가기</button>
-            </NavLink>
+          <div className="line"> </div>
 
-            <NavLink to="/signup" className="signUp_link">
-              <button className="signUp_btn">회원 가입</button>
-            </NavLink>
-          </div>
+          {/* -----------------패스워드 찾기------------------ */}
+
+          <h2>PW 찾기</h2>
+          {/* 바로 아랫 줄 코드. 이메일 형식이 안맞으면 말풍선으로 에러 메세지 띄움 */}
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="find_pw_box">
+              <div className="inputInfo">
+                <span className="email_span">e-mail</span>
+                <input
+                  type="email"
+                  onChange={handleInputValue("email")}
+                ></input>
+              </div>
+              <div>
+                <span>고객명</span>
+                <input
+                  type="text"
+                  onChange={handleInputValue("name")}
+                ></input>
+              </div>
+
+              <div>
+                <span>연락처</span>
+                <input
+                  type="text"
+                  onChange={handleInputValue("mobile")}
+                ></input>
+              </div>
+            </div>
+            <div>{info.errorMessagePw}</div>
+
+            {/* <NavLink to='/userpw'> */}
+            <Button className="findBtn" onClick={handleFindPwValue}>
+              PW 찾기
+              </Button>
+            {/* </NavLink> */}
+          </form>
+
+          <NavLink to="" className="signUp_link">
+            <Button className="signUp_btn">로그인 페이지로 돌아가기</Button>
+          </NavLink>
+
+          <NavLink to="/signup" className="signUp_link">
+            <Button className="signUp_btn">회원 가입</Button>
+          </NavLink>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 
 export default FindAccount;
