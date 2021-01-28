@@ -4,6 +4,7 @@ import logo from "../image/logo.png";
 // import user from "../test_data_user.json";
 import axios from "axios";
 import { any, number, string } from "prop-types";
+import Button from "./Button";
 
 interface SignInModalProps {
     handleResponseSuccess: () => void;
@@ -225,18 +226,18 @@ const SignInModal: React.FC<SignInModalProps> = (props) => {
                         </div>
                         <div>
                             {/* <NavLink to="/todo"> */}
-                            <button
+                            <Button
                                 className="loginButton"
                                 type="submit"
                                 onClick={handleSignIn}
                             >
                                 로그인
-                </button>
+                </Button>
                             {/* </NavLink> */}
                             <div>
-                                <button className="loginButton" type="submit">
+                                <Button className="loginButton" type="submit">
                                     Github 로그인
-                  </button>
+                  </Button>
                             </div>
                             <div className="alert-box">{userInfo.errorMessage}</div>
                         </div>

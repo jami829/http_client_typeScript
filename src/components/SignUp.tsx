@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Button from "./Button";
 
 //fakedate
 // import user from "../test_data_user.json";
@@ -252,12 +253,12 @@ function SignUpModal(props: any) {
               <div>{info.errorMessage}</div>
 
               {/* <NavLink to='' className='signUp_link'> */}
-              <button
+              <Button
                 className="signUp_btn"
                 onClick={handClickAddNewUserInfo}
               >
                 회원 가입
-                </button>
+                </Button>
               {/* </NavLink> */}
             </div>
           </form>
