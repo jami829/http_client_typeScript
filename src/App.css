@@ -232,3 +232,15 @@ input[type="text"] {
   margin-top: 50%;
   /* line-height: 50%; */
 }
+
+
+.return_to_signin {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.9rem;
+}
+.return_to_signin:hover {
+  cursor: pointer;
+  color: rgb(243, 115, 136);
+}
