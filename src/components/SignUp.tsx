@@ -147,6 +147,7 @@ function SignUpModal(props: any) {
       .post("https://api.get-todo.com/signup", NewUserInformation)
       .then((response) => {
         console.log("res", response);
+        alert("회원가입이 완료되었습니다. 로그인을 해주세요.")
         props.history.push("/");
       })
       .catch((error) => {
