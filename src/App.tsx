@@ -16,6 +16,7 @@ import FindAccount from './components/Find_account';
 import CompletedFindEmail from './components/Find_Email_completed';
 import CompletedFindPw from './components/Find_PW_completed';
 import Edit from './components/Edit';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -220,6 +221,9 @@ function App() {
         </Route> */}
         {/* <Route path={"/remove"} component={Remove} /> */}
         <Route path={"/remove_user_completed"} component={Remove_completed} signOut={handleSignOut} />
+      </div>
+      <div className="footer">
+        <Footer />
       </div>
     </Router>
   )
