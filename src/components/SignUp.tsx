@@ -262,6 +262,11 @@ function SignUpModal(props: any) {
               {/* </NavLink> */}
             </div>
           </form>
+          <div className="return_to_signin">
+            <NavLink to="/" style={{ textDecoration: "none", color: "gray" }}>
+              <span> 로그인 페이지로 돌아가기 </span>
+            </NavLink>
+          </div>
         </div>
       </div>
     </div>
