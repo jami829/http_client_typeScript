@@ -216,6 +216,7 @@ function FindAccount({ history }: any) {
                 <span className="findAccount_span">고객명</span>
                 <input
                   type="text"
+                  placeholder="이름을 입력하세요."
                   onChange={handleInputValue("name")}
                 ></input>
               </div>
@@ -224,6 +225,7 @@ function FindAccount({ history }: any) {
                 <span className="findAccount_span">연락처</span>
                 <input
                   type="text"
+                  placeholder="연락처를 입력하세요."
                   onChange={handleInputValue("mobile")}
                 ></input>
               </div>
@@ -249,6 +251,7 @@ function FindAccount({ history }: any) {
                 <span className="findAccount_span">e-mail</span>
                 <input
                   type="email"
+                  placeholder="이메일을 입력하세요."
                   onChange={handleInputValue("email")}
                 ></input>
               </div>
@@ -256,6 +259,7 @@ function FindAccount({ history }: any) {
                 <span className="findAccount_span">고객명</span>
                 <input
                   type="text"
+                  placeholder="이름을 입력하세요."
                   onChange={handleInputValue("name")}
                 ></input>
               </div>
@@ -264,6 +268,7 @@ function FindAccount({ history }: any) {
                 <span className="findAccount_span">연락처</span>
                 <input
                   type="text"
+                  placeholder="연락처를 입력하세요."
                   onChange={handleInputValue("mobile")}
                 ></input>
               </div>

@@ -192,7 +192,16 @@ function SignUpModal(props: any) {
       })
     } */
   };
-
+  useEffect(() => { // axios와 같은 fetch 비동기 해결(state 적용되는 속도 맞추기 위함)
+    if (info.errorMessage.length > 0) {
+      try {
+        alert(info.errorMessage)
+      }
+      catch {
+        console.log("주의메세지가 없습니다.")
+      }
+    }
+  })
 
   // console.log('user', user)
   // console.log(this.props)
@@ -214,6 +223,7 @@ function SignUpModal(props: any) {
                 <span>
                   <input
                     type="email"
+                    placeholder="이메일을 입력하세요."
                     onChange={handleInPutValue("email")}
                   ></input>
                 </span>
@@ -233,16 +243,17 @@ function SignUpModal(props: any) {
                   <input
                     className="Signup_Pw_inputInfo"
                     type="password"
+                    placeholder="비밀번호를 입력하세요."
                     onChange={handleInPutValue("password")}
                   ></input>
                 </span>
               </div>
-
               <div>
                 <span className="signup_span_title">고객명</span>
                 <span>
                   <input
                     type="text"
+                    placeholder="이름을 입력하세요."
                     onChange={handleInPutValue("name")}
                   ></input>
                 </span>
@@ -253,14 +264,13 @@ function SignUpModal(props: any) {
                 <span>
                   <input
                     type="text"
+                    placeholder="연락처를 입력하세요."
                     onChange={handleInPutValue("mobile")}
                   ></input>
                 </span>
-                <div>{info.errorMessageMobile}</div>
               </div>
             </div>
             <div>
-              <div>{info.errorMessage}</div>
 
               {/* <NavLink to='' className='signUp_link'> */}
               <Button

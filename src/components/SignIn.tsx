@@ -207,6 +207,7 @@ const SignInModal: React.FC<SignInModalProps> = (props) => {
                                 <span>
                                     <input
                                         type="email"
+                                        placeholder="이메일을 입력하세요."
                                         onChange={hadleInputValue("email")}
                                     ></input>
                                 </span>
@@ -216,6 +217,7 @@ const SignInModal: React.FC<SignInModalProps> = (props) => {
                                 <span>
                                     <input
                                         type="password"
+                                        placeholder="비밀번호를 입력하세요."
                                         onChange={hadleInputValue("password")}
                                     ></input>
                                 </span>
