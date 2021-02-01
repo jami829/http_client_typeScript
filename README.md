@@ -5,10 +5,7 @@
 
 <img src="https://media.vlpt.us/post-images/velopert/05739e50-e08b-11e9-8238-1bb30828b506/ts-and-react.png" width="300px" height="200px">
 
-
-사진을 클릭면 사이트로 이동합니다 :)
-
-<b>제가 맡았던 파트 이외에 전반적으로 타입스크립트와 리액트 hooks로 리팩토링을 진행하였습니다.</b>
+<b>제가 맡았던 파트 이외에 전반적으로 <u>타입스크립트</u>와 <u>리액트 hooks</u>로 리팩토링을 진행하였습니다.</b>
 
 
 [참고 사항]
@@ -24,6 +21,6 @@
 기존 프로젝트(리팩토링 전) 레파지토리는 아래 주소에서 확인이 가능합니다. <br />
 ► https://github.com/codestates/http-client/tree/dev
 
-<a href="https://get-todo.com" target='_blank'>
-► 배포 링크(클릭)
-</a>
+► [배포 링크(클릭)](https://get-todo.com){:target='_blank'}
+
+
