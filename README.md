@@ -21,6 +21,7 @@
 기존 프로젝트(리팩토링 전) 레파지토리는 아래 주소에서 확인이 가능합니다. <br />
 ► https://github.com/codestates/http-client/tree/dev
 
-► [배포 링크(클릭)](https://get-todo.com){:target='_blank'}
+► [배포 링크(클릭)](https://get-todo.com)
+
 
 
