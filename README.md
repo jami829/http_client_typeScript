@@ -1,6 +1,6 @@
 
 
-# 기존 코드스테이츠 First Project: To-Do - 타입스크립트 & React-hooks 리팩토링 버전입니다.
+# 기존 코드스테이츠 First Project: To-Do -> 타입스크립트 & React-hooks 리팩토링 버전입니다.
 
 
 <img src="https://media.vlpt.us/post-images/velopert/05739e50-e08b-11e9-8238-1bb30828b506/ts-and-react.png" width="300px" height="200px">
