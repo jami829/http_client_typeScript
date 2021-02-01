@@ -2,9 +2,9 @@
 
 # 기존 코드스테이츠 First Project: To-Do - 타입스크립트 & React-hooks 리팩토링 버전입니다.
 
-<a href="https://get-todo.com" target="_blank">
+
 <img src="https://media.vlpt.us/post-images/velopert/05739e50-e08b-11e9-8238-1bb30828b506/ts-and-react.png" width="300px" height="200px">
-</a>
+
 
 사진을 클릭면 사이트로 이동합니다 :)
 
@@ -23,3 +23,7 @@
 
 기존 프로젝트(리팩토링 전) 레파지토리는 아래 주소에서 확인이 가능합니다. <br />
 ► https://github.com/codestates/http-client/tree/dev
+
+<a href="https://get-todo.com" target='_blank'>
+► 배포 링크(클릭)
+</a>
