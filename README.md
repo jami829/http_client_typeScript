@@ -3,7 +3,7 @@
 # 기존 코드스테이츠 First Project: To-Do - 타입스크립트 & React-hooks 리팩토링 버전입니다.
 
 <a href="https://get-todo.com" target="_blank">
-<imh src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fvelog.io%2F%40velopert%2Fusing-hooks-with-typescript&psig=AOvVaw07m93GYJW8RfaEz6hejc1j&ust=1612230549349000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiQ1YXJx-4CFQAAAAAdAAAAABAJ">
+<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fvelog.io%2F%40velopert%2Fusing-hooks-with-typescript&psig=AOvVaw07m93GYJW8RfaEz6hejc1j&ust=1612230549349000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiQ1YXJx-4CFQAAAAAdAAAAABAJ">
 </a>
 
 사진을 클릭면 사이트로 이동합니다 :)
